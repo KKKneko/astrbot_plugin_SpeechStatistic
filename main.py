@@ -19,16 +19,6 @@ def Visualization(name,data):
     plt.rcParams['font.sans-serif'] = [my_font.get_name()]  # 使用自定义字体
     plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
-    # 3. 定义你的原始数据，使用字典非常方便，键是名称，值是分数
-    '''
-    data = {
-        '李拜天': ['08814721424',88],
-        '玩家B': ['id2',92],
-        '玩家C': ['id3',75],
-        '玩家D': ['id4',98],
-        '玩家E': ['id5',85],
-    }
-'''
     # 4. 对数据进行排序（这是最关键的一步）
     #    sorted() 函数可以对任何可迭代对象进行排序
     #    data.items() 会将字典转换为 [('玩家A', 88), ('玩家B', 92), ...] 这样的元组列表
@@ -216,6 +206,7 @@ class Speach_Statistics(Star):
             yield event.plain_result('移除任务失败')
         else:
             yield event.plain_result('移除任务成功')
+
 
 
 
