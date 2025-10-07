@@ -1,9 +1,3 @@
-# helloworld
+#发言统计（未完成）
 
-AstrBot 插件模板
-
-A template plugin for AstrBot plugin feature
-
-# 支持
-
-[帮助文档](https://astrbot.app)
+统计每日群友发言次数并生成可视化排行榜
