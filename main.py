@@ -8,50 +8,18 @@ import datetime
 import os
 
 def Visualization(name,data):
-    import matplotlib
-    # 设置非交互式后端，解决Linux服务器无GUI问题
-    matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from matplotlib.font_manager import FontProperties
-    import platform
 
     # 指定项目下的字体文件路径
     current_dir = os.path.dirname(os.path.abspath(__file__))
     font_path = os.path.join(current_dir, 'STXINGKA.TTF')
-    
-    # 检查字体文件是否存在和可读
-    if not os.path.exists(font_path):
-        print(f"警告: 字体文件不存在: {font_path}")
-        # 尝试使用系统默认中文字体
-        if platform.system() == 'Linux':
-            # Linux常见中文字体路径
-            fallback_fonts = [
-                '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
-                '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf',
-                '/System/Library/Fonts/Arial.ttf'  # macOS
-            ]
-            font_path = None
-            for font in fallback_fonts:
-                if os.path.exists(font):
-                    font_path = font
-                    break
-    
-    # 设置字体
-    try:
-        if font_path and os.path.exists(font_path):
-            my_font = FontProperties(fname=font_path)
-            plt.rcParams['font.sans-serif'] = [my_font.get_name()]
-            print(f"成功加载字体: {font_path}")
-        else:
-            # 如果没有找到合适的字体文件，尝试使用matplotlib内置字体
-            print("使用matplotlib默认字体处理中文")
-            plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'sans-serif']
-    except Exception as e:
-        print(f"字体加载失败: {e}")
-        # 使用matplotlib默认设置
-        plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans', 'Arial Unicode MS', 'sans-serif']
-    
+    my_font = FontProperties(fname=font_path)
+
+    plt.rcParams['font.sans-serif'] = [my_font.get_name()]  # 使用自定义字体
     plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
+
+    # 3. 定义你的原始数据，使用字典非常方便，键是名称，值是分数
     # 4. 对数据进行排序（这是最关键的一步）
     #    sorted() 函数可以对任何可迭代对象进行排序
     #    data.items() 会将字典转换为 [('玩家A', 88), ('玩家B', 92), ...] 这样的元组列表
@@ -102,8 +70,8 @@ def Visualization(name,data):
     ax.set_ylabel('用户', fontsize=30)
     
     # 设置Y轴标签（sorted_players）的字体大小
-    ax.tick_params(axis='y', labelsize=16)  
-    ax.tick_params(axis='x', labelsize=14)  
+    ax.tick_params(axis='y', labelsize=16)
+    ax.tick_params(axis='x', labelsize=14)
 
     # 13. 优化坐标轴边框，让图表更简洁
     #     一个图表有四条边框(spines): top, bottom, left, right
