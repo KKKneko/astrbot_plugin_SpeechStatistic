@@ -68,6 +68,9 @@ def Visualization(name,data):
     ax.set_xlabel('发言数', fontsize=30)
     ax.set_ylabel('用户', fontsize=30)
 
+    # 设置Y轴标签（sorted_players）的字体大小
+    ax.tick_params(axis='y', labelsize=16)  
+    ax.tick_params(axis='x', labelsize=14)  
     # 13. 优化坐标轴边框，让图表更简洁
     #     一个图表有四条边框(spines): top, bottom, left, right
     ax.spines['top'].set_visible(False)   # 隐藏顶部边框
@@ -206,6 +209,7 @@ class Speach_Statistics(Star):
             yield event.plain_result('移除任务失败')
         else:
             yield event.plain_result('移除任务成功')
+
 
 
 
