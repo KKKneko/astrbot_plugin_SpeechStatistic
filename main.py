@@ -10,8 +10,17 @@ import os
 def Visualization(name,data):
     # 使用非交互后端，避免服务器/容器无显示导致渲染失败（需在导入 pyplot 前设置）
     import matplotlib
-    matplotlib.use("Agg")
+    try:
+        matplotlib.use("Agg", force=True)
+    except Exception:
+        pass
     import matplotlib.pyplot as plt
+    try:
+        # 如果在其它地方已导入 pyplot，尝试切换到 Agg
+        if 'agg' not in matplotlib.get_backend().lower():
+            plt.switch_backend('Agg')
+    except Exception as _:
+        pass
     from matplotlib.font_manager import FontProperties
     from matplotlib import font_manager as fm
     import platform
@@ -32,9 +41,9 @@ def Visualization(name,data):
                 return None
 
             # 1) 插件随包字体
-            name = try_add_font(local_font)
-            if name:
-                preferred_fonts.append(name)
+            stx_name = try_add_font(local_font)
+            if stx_name:
+                preferred_fonts.append(stx_name)
 
             # 2) 常见系统中文字体（按存在情况动态添加，便于统一渲染风格）
             candidates = [
